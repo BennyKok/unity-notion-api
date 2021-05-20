@@ -1,0 +1,12 @@
+{
+  "name": "notion-api",
+  "version": "1.0.0",
+  "description": "A simple API wrapper for Notion API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "BennyKok",
+  "license": "ISC",
+  "displayName": "Notion API"
+}
