@@ -57,5 +57,7 @@ public class CardDatabaseProperties
 
 ## TO-DO
 
-- [ ] Implement basic data model for Page
-- [ ] Type parsed method for QueryDatabaseJSON
+- [x] Implement basic data model for Page
+- [x] Type parsed method for QueryDatabaseJSON
+- [ ] Data Model accessibility (Implicit operator + Date conversion)
+- [ ] Filter options for db query?

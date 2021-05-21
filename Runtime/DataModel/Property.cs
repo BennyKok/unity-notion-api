@@ -24,7 +24,7 @@ namespace BennyKok.NotionAPI
     }
 
     [Serializable]
-    public class MultiSelectProperty : Property
+    public class MultiSelectPropertyDefinition : Property
     {
         public Options multi_select;
     }
@@ -32,12 +32,48 @@ namespace BennyKok.NotionAPI
     [Serializable]
     public class SelectProperty : Property
     {
+        public OptionEntry select;
+    }
+
+    [Serializable]
+    public class MultiSelectProperty : Property
+    {
+        public OptionEntry[] multi_select;
+    }
+
+    [Serializable]
+    public class SelectPropertyDefinition : Property
+    {
         public Options select;
     }
 
     [Serializable]
     public class TitleProperty : Property
     {
+        public Text[] title;
+    }
 
+    [Serializable]
+    public class TextProperty : Property
+    {
+        public Text[] text;
+    }
+
+    [Serializable]
+    public class NumberProperty : Property
+    {
+        public float number;
+    }
+
+    [Serializable]
+    public class CheckboxProperty : Property
+    {
+        public bool checkbox;
+    }
+
+    [Serializable]
+    public class DateProperty : Property
+    {
+        public Date date;
     }
 }

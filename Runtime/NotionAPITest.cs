@@ -14,7 +14,7 @@ namespace BennyKok.NotionAPI
         {
             var api = new NotionAPI(apiKey);
 
-            yield return api.GetDatabase<CardDatabaseProperties>(database_id, (db) =>
+            yield return api.GetDatabase<CardDatabasePropertiesDefinition>(database_id, (db) =>
             {
                 Debug.Log(db.id);
                 Debug.Log(db.created_time);
@@ -23,10 +23,22 @@ namespace BennyKok.NotionAPI
                 Debug.Log(JsonUtility.ToJson(db));
             });
 
-            yield return api.QueryDatabaseJSON(database_id, (db) =>
+            yield return api.QueryDatabase<CardDatabaseProperties>(database_id, (db) =>
             {
-                Debug.Log(db);
+                Debug.Log(JsonUtility.ToJson(db));
             });
+        }
+
+        [Serializable]
+        public class CardDatabasePropertiesDefinition
+        {
+            public MultiSelectPropertyDefinition Tags;
+            public TitleProperty Name;
+            public CheckboxProperty IsActive;
+            public DateProperty Date;
+            public SelectPropertyDefinition Type;
+            public NumberProperty number;
+            public TextProperty Description;
         }
 
         [Serializable]
@@ -34,6 +46,11 @@ namespace BennyKok.NotionAPI
         {
             public MultiSelectProperty Tags;
             public TitleProperty Name;
+            public CheckboxProperty IsActive;
+            public DateProperty Date;
+            public SelectProperty Type;
+            public NumberProperty number;
+            public TextProperty Description;
         }
     }
 }

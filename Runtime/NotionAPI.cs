@@ -62,7 +62,6 @@ namespace BennyKok.NotionAPI
             }
         }
 
-
         /// <summary>
         /// Get the Notion Database JSON object parsed with Unity's JsonUtility
         /// </summary>
@@ -80,7 +79,7 @@ namespace BennyKok.NotionAPI
         }
 
         /// <summary>
-        /// Return the entire Notion Database JSON object without parsing
+        /// Return the entire Notion Database schema in raw JSON string
         /// </summary>
         /// <param name="database_id">Database Id</param>
         /// <param name="callback"></param>
@@ -89,6 +88,15 @@ namespace BennyKok.NotionAPI
         {
             var url = $"{urlDB}/{database_id}";
             yield return GetJSON(url, callback);
+        }
+
+        public IEnumerator QueryDatabase<T>(string database_id, Action<DatabaseQueryResponse<T>> callback)
+        {
+            yield return QueryDatabaseJSON(database_id, (json) =>
+            {
+                if (debug) Debug.Log(json);
+                callback(JsonUtility.FromJson<DatabaseQueryResponse<T>>(json));
+            });
         }
 
         public IEnumerator QueryDatabaseJSON(string database_id, Action<string> callback)

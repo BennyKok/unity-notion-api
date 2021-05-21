@@ -3,30 +3,29 @@ using System;
 namespace BennyKok.NotionAPI
 {
     [Serializable]
-    public class Database<T>
+    public class IDObject
     {
         public string id;
         public string created_time;
         public string last_edited_time;
-        public TextBlock[] title;
+    }
+
+    [Serializable]
+    public class Database<T> : IDObject
+    {
+        public Text[] title;
         public T properties;
     }
 
     [Serializable]
-    public class Text
+    public class Page<T> : IDObject
     {
-        public string content;
-        public string link;
+        public T properties;
     }
 
     [Serializable]
-    public class Annotations
+    public class DatabaseQueryResponse<T>
     {
-        public bool bold;
-        public bool italic;
-        public bool strikethrough;
-        public bool underline;
-        public bool code;
-        public string color;
+        public Page<T>[] results;
     }
 }
