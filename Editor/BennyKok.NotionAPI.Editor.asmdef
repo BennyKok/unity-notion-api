@@ -2,7 +2,8 @@
     "name": "BennyKok.NotionAPI.Editor",
     "rootNamespace": "BennyKok.NotionAPI.Editor",
     "references": [
-        "GUID:9a678814a577206439b7c76fbbddfba3"
+        "GUID:9a678814a577206439b7c76fbbddfba3",
+        "GUID:478a2357cc57436488a56e564b08d223"
     ],
     "includePlatforms": [
         "Editor"

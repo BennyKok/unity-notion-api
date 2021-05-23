@@ -50,6 +50,7 @@ namespace BennyKok.NotionAPI
             public DateProperty Date;
             public SelectProperty Type;
             public NumberProperty number;
+            public NumberProperty UseTime;
             public TextProperty Description;
         }
     }
