@@ -17,6 +17,7 @@ namespace BennyKok.NotionAPI
         {
             public string content;
             public string link;
+            public static implicit operator string(TextContent text) => !string.IsNullOrEmpty(text.content) ? text.content : text.link;
         }
 
         [Serializable]
