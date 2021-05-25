@@ -15,7 +15,6 @@ namespace BennyKok.NotionAPI
         public string id;
         public string name;
         public string color;
-        public static implicit operator string(OptionEntry option) => option.name;
     }
 
     [Serializable]
@@ -34,14 +33,14 @@ namespace BennyKok.NotionAPI
     public class SelectProperty : Property
     {
         public OptionEntry select;
-        public static implicit operator OptionEntry(SelectProperty property) => property.select;
+        public OptionEntry Value => select;
     }
 
     [Serializable]
     public class MultiSelectProperty : Property
     {
         public OptionEntry[] multi_select;
-        public static implicit operator OptionEntry[](MultiSelectProperty property) => property.multi_select;
+        public OptionEntry[] Value => multi_select;
     }
 
     [Serializable]
@@ -54,30 +53,57 @@ namespace BennyKok.NotionAPI
     public class TitleProperty : Property
     {
         public Text[] title;
-        public static implicit operator string(TitleProperty property)
-        => (property.title != null && property.title.Length > 0) ? property.title[0].text : null;
+        public string Value
+        => (title != null && title.Length > 0) ? title[0].text : null;
+    }
+
+    [Serializable]
+    public class TextPropertyDefinition : Property
+    {
+        public Text[] text;
+        public string Value
+        => (text != null && text.Length > 0) ? text[0].plain_text : null;
     }
 
     [Serializable]
     public class TextProperty : Property
     {
-        public Text[] text;
-        public static implicit operator string(TextProperty property)
-        => (property.text != null && property.text.Length > 0) ? property.text[0].text : null;
+        public Text[] rich_text;
+        public string Value
+        => (rich_text != null && rich_text.Length > 0) ? rich_text[0].plain_text : null;
+    }
+
+    [Serializable]
+    public class FormulaStringProperty : Property
+    {
+        public FormulaString formula;
+        public string Value
+        => formula.@string;
+
+        [Serializable]
+        public class FormulaString
+        {
+            public string type;
+            public string @string;
+        }
     }
 
     [Serializable]
     public class NumberProperty : Property
     {
         public float number;
-        public static implicit operator float(NumberProperty property) => property.number;
+        public float Value => number;
+
+        public override string ToString() => number.ToString();
     }
 
     [Serializable]
     public class CheckboxProperty : Property
     {
         public bool checkbox;
-        public static implicit operator bool(CheckboxProperty property) => property.checkbox;
+        public bool Value => checkbox;
+
+        public override string ToString() => checkbox.ToString();
     }
 
     [Serializable]

@@ -15,7 +15,7 @@ namespace BennyKok.NotionAPI.Editor
         {
             base.OnInspectorGUI();
 
-            if (GUILayout.Button("Get Schema"))
+            if (GUILayout.Button("Fetch Schema"))
             {
                 var m_target = target as DatabaseSchema;
                 var api = new NotionAPI(m_target.apiKey);
@@ -32,8 +32,16 @@ namespace BennyKok.NotionAPI.Editor
                         m_target.fieldNames.Add(node.Key);
                         m_target.fieldTypes.Add(node.Value["type"]);
                     }
+                    EditorUtility.SetDirty(m_target);
                     CreateCodeSchemaFile(m_target);
                 }), this);
+            }
+            if (GUILayout.Button("Re-generate"))
+            {
+                var m_target = target as DatabaseSchema;
+                var api = new NotionAPI(m_target.apiKey);
+
+                CreateCodeSchemaFile(m_target);
             }
         }
 
@@ -93,6 +101,7 @@ namespace BennyKok.NotionAPI.Editor
                 case "select": return typeof(SelectProperty);
                 case "checkbox": return typeof(CheckboxProperty);
                 case "date": return typeof(DateProperty);
+                case "formula": return typeof(FormulaStringProperty);
             }
 
             return null;
