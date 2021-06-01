@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace BennyKok.NotionAPI
 {
@@ -33,6 +32,6 @@ namespace BennyKok.NotionAPI
     [Serializable]
     public class DatabaseUsers
     {
-        public List<UserObject> results;
+        public UserObject[] results;
     }
 }
