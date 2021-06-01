@@ -12,6 +12,7 @@ namespace BennyKok.NotionAPI
         private readonly static string version = "v1";
         private readonly static string rootUrl = $"https://api.notion.com/{version}";
         private readonly static string urlDB = rootUrl + "/databases";
+        private readonly static string urlUsers = rootUrl + "/users";
 
         public NotionAPI(string apiKey)
         {
@@ -103,6 +104,17 @@ namespace BennyKok.NotionAPI
         {
             var url = $"{urlDB}/{database_id}/query";
             yield return PostJSON(url, callback, null);
+        }
+
+        public IEnumerator GetUsers(Action<DatabaseUsers> callback)
+        {
+            var url = $"{urlUsers}/";
+
+            yield return GetJSON(url, (json) =>
+            {
+                if (debug) Debug.Log(json);
+                callback(JsonUtility.FromJson<DatabaseUsers>(json));
+            });
         }
     }
 }

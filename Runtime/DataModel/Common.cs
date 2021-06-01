@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace BennyKok.NotionAPI
 {
@@ -27,5 +28,11 @@ namespace BennyKok.NotionAPI
     public class DatabaseQueryResponse<T>
     {
         public Page<T>[] results;
+    }
+
+    [Serializable]
+    public class DatabaseUsers
+    {
+        public List<UserObject> results;
     }
 }
