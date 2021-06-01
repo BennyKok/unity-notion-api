@@ -102,6 +102,7 @@ namespace BennyKok.NotionAPI.Editor
                 case "checkbox": return typeof(CheckboxProperty);
                 case "date": return typeof(DateProperty);
                 case "formula": return typeof(FormulaStringProperty);
+                case "people": return typeof(PeopleProperty);
             }
 
             return null;
