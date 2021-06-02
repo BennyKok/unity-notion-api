@@ -28,4 +28,10 @@ namespace BennyKok.NotionAPI
     {
         public Page<T>[] results;
     }
+
+    [Serializable]
+    public class DatabaseUsers
+    {
+        public UserObject[] results;
+    }
 }

@@ -111,4 +111,25 @@ namespace BennyKok.NotionAPI
     {
         public Date date;
     }
+
+    [Serializable]
+    public class Person
+    {
+        public string email;
+    }
+
+    [Serializable]
+    public class UserObject : Property
+    {
+        public string name;
+        public string avatarURL;
+        public Person person;
+    }
+
+    [Serializable]
+    public class PeopleProperty : Property
+    {
+        public UserObject[] people;
+        public UserObject[] Value => people;
+    }
 }
