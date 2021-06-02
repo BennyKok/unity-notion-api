@@ -255,8 +255,13 @@ namespace BennyKok.NotionAPI.Editor
             sb.Append("EditorCoroutineUtility.StartCoroutine(api.GetDatabase<Definition>(databaseID, (db) => { database = db; }), this);");
             NewLine();
             sb.Append("EditorCoroutineUtility.StartCoroutine(api.QueryDatabase<Properties>(databaseID, (pages) => { this.pages = pages.results; }), this);");
-            NewLine();
-            sb.Append("EditorCoroutineUtility.StartCoroutine(api.GetUsers((users) => { this.users = users; }), this);");
+
+            if (hasPeopleProperty)
+            {
+                NewLine();
+                sb.Append("EditorCoroutineUtility.StartCoroutine(api.GetUsers((users) => { this.users = users; }), this);");
+            }
+
             indentLevel--;
             NewLine();
             sb.Append("}");
