@@ -122,7 +122,7 @@ namespace BennyKok.NotionAPI
     public class UserObject : Property
     {
         public string name;
-        public string avatarURL;
+        public string avatar_url;
         public Person person;
     }
 
