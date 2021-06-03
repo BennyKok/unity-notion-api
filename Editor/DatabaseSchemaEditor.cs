@@ -262,6 +262,9 @@ namespace BennyKok.NotionAPI.Editor
                 sb.Append("EditorCoroutineUtility.StartCoroutine(api.GetUsers((users) => { this.users = users; }), this);");
             }
 
+            NewLine();
+            sb.Append("UnityEditor.EditorUtility.SetDirty(this);");
+
             indentLevel--;
             NewLine();
             sb.Append("}");
