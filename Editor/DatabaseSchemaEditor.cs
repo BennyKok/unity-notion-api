@@ -219,10 +219,7 @@ namespace BennyKok.NotionAPI.Editor
             NewLine();
 
             NewLine();
-            sb.Append(string.Format("public string apiKey = \"{0}\";", target.apiKey));
-
-            NewLine();
-            sb.Append(string.Format("public string databaseID = \"{0}\";", target.database_id));
+            sb.Append("public DatabaseSchema databaseSchema;");
 
             NewLine();
             sb.Append("public Database<Definition> database;");
@@ -250,11 +247,11 @@ namespace BennyKok.NotionAPI.Editor
             sb.Append("{");
             indentLevel++;
             NewLine();
-            sb.Append("var api = new NotionAPI(apiKey);");
+            sb.Append("var api = new NotionAPI(databaseSchema.apiKey);");
             NewLine();
-            sb.Append("EditorCoroutineUtility.StartCoroutine(api.GetDatabase<Definition>(databaseID, (db) => { database = db; }), this);");
+            sb.Append("EditorCoroutineUtility.StartCoroutine(api.GetDatabase<Definition>(databaseSchema.database_id, (db) => { database = db; }), this);");
             NewLine();
-            sb.Append("EditorCoroutineUtility.StartCoroutine(api.QueryDatabase<Properties>(databaseID, (pages) => { this.pages = pages.results; }), this);");
+            sb.Append("EditorCoroutineUtility.StartCoroutine(api.QueryDatabase<Properties>(databaseSchema.database_id, (pages) => { this.pages = pages.results; }), this);");
 
             if (hasPeopleProperty)
             {
@@ -288,6 +285,7 @@ namespace BennyKok.NotionAPI.Editor
 
             EditorPrefs.SetString("NotionAPI_DatabaseName", className);
             EditorPrefs.SetString("NotionAPI_DatabasePath", Path.Combine(path.ToString(), className));
+            EditorPrefs.SetInt("NotionAPI_DatabaseSchemaId", target.GetInstanceID());
         }
 
         public Type GetPropertyTypeFromNotionType(string notionType)
@@ -331,12 +329,17 @@ namespace BennyKok.NotionAPI.Editor
 
             string className = EditorPrefs.GetString("NotionAPI_DatabaseName");
             string path = EditorPrefs.GetString("NotionAPI_DatabasePath");
+            int schemaInstanceId = EditorPrefs.GetInt("NotionAPI_DatabaseSchemaId");
 
             EditorPrefs.DeleteKey("NotionAPI_DatabaseName");
             EditorPrefs.DeleteKey("NotionAPI_DatabasePath");
+            EditorPrefs.DeleteKey("NotionAPI_DatabaseSchemaId");
+
+            var schema = EditorUtility.InstanceIDToObject(schemaInstanceId);
 
             ScriptableObject so = CreateInstance(className);
             so.name = className;
+            so.GetType().GetField("databaseSchema").SetValue(so,schema);
 
             AssetDatabase.CreateAsset(so, path + ".asset");
             AssetDatabase.SaveAssets();
