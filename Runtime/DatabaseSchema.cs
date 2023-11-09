@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace BennyKok.NotionAPI
 {
-    [CreateAssetMenu(fileName = "DatabaseSchema", menuName = "Notion API/DatabaseSchema", order = 0)]
+    [CreateAssetMenu(fileName = "MyDatabaseSchema", menuName = "Notion API/DatabaseSchema", order = 0)]
     public class DatabaseSchema : ScriptableObject
     {
         public string apiKey;
