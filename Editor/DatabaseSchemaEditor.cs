@@ -341,6 +341,11 @@ namespace BennyKok.NotionAPI.Editor
             so.name = className;
             so.GetType().GetField("databaseSchema").SetValue(so,schema);
 
+            // Convert absolute path to relative path
+            if (path.StartsWith(Path.GetFullPath(Application.dataPath))) {
+                path = "Assets" + path.Substring(Application.dataPath.Length);
+            }
+
             AssetDatabase.CreateAsset(so, path + ".asset");
             AssetDatabase.SaveAssets();
         }
