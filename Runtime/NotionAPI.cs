@@ -38,6 +38,7 @@ namespace BennyKok.NotionAPI
             }
             request.SetRequestHeader("Authorization", $"Bearer {apiKey}");
             request.SetRequestHeader("Content-Type", "application/json");
+            request.SetRequestHeader("Notion-Version", "2021-05-13");
             return request;
         }
 
